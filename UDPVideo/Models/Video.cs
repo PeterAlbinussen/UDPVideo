@@ -11,6 +11,13 @@ namespace UDPVideo.Models
     {
         public DateTime DateTime {get; set; }
         public int Id { get; set; }
-        
+
+
+
+        public override string ToString()
+        {
+            return "Dato og tid: " + DateTime;
+        }
+
     }
 }

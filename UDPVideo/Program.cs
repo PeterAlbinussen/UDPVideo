@@ -12,55 +12,21 @@ namespace UDPVideo
     {
         static void Main(string[] args)
         {
+            UDP udp = new UDP();
+            Console.WriteLine("hej");
 
-        private static Int32 _nextId = 1;
-
-        UdpClient updserver = new UdpClient(9999);
-
-        public void RecieverData()
-        {
-
-
-            IPAddress ip = IPAddress.Parse("192.168.104.200");
-
-            IPEndPoint remoteIpEndPoint = new IPEndPoint(ip, 9999);
-
-            try
+            while(true)
             {
-                Video video = new Video();
-
-
-
-
-                Byte[] receivedBytes = updserver.Receive(ref remoteIpEndPoint);
-                Console.WriteLine("received");
-
-                string receivedData = Encoding.ASCII.GetString(receivedBytes);
-
-                string[] data = receivedData.Split(" ");
-                
-
-                video.DateTime = data[0];
-
-                video.Id = data[1];
-
-
-
-                video.DateTime = Int32.Parse(data[0]);
-
-
+                udp.ReceiverData();
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+
         }
-    
-
-
-
+    }
 }
-}
+
+
+
+
+
 
 
