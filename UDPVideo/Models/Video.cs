@@ -11,6 +11,8 @@ namespace UDPVideo.Models
     {
         public DateTime DateTime {get; set; }
         public int Id { get; set; }
+        
+        
 
 
 

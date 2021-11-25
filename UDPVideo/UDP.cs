@@ -16,18 +16,14 @@ namespace UDPVideo
 
         public void ReceiverData()
         {
-
-
-            IPAddress ip = IPAddress.Parse("192.168.104.200");
+            
+            IPAddress ip = IPAddress.Any;
 
             IPEndPoint remoteIpEndPoint = new IPEndPoint(ip, 9999);
 
             try
             {
                 Video video = new Video();
-
-
-
 
                 Byte[] receivedBytes = updserver.Receive(ref remoteIpEndPoint);
                 Console.WriteLine("received");
@@ -36,12 +32,9 @@ namespace UDPVideo
 
                 string[] data = receivedData.Split(" ");
 
-
                 //video.DateTime = data[0];
 
                 //video.Id = data[1];
-
-
 
                 video.DateTime = DateTime.Parse(data[0]);
                 video.Id = Int32.Parse(data[1]);
