@@ -13,7 +13,7 @@ namespace UDPVideo
         static void Main(string[] args)
         {
             UDP udp = new UDP();
-            Console.WriteLine("hej");
+            Console.WriteLine("UDP server started");
 
             while(true)
             {

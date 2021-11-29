@@ -12,7 +12,7 @@ namespace UDPVideo
     {
         private static int _nextId = 1;
 
-        UdpClient updserver = new UdpClient(9999);
+        UdpClient updserver = new UdpClient(7777);
 
         public void ReceiverData()
         {
@@ -26,7 +26,7 @@ namespace UDPVideo
                 Video video = new Video();
 
                 Byte[] receivedBytes = updserver.Receive(ref remoteIpEndPoint);
-                Console.WriteLine("received");
+                Console.WriteLine("received information from sensor: ");
 
                 string receivedData = Encoding.ASCII.GetString(receivedBytes);
 
@@ -36,10 +36,13 @@ namespace UDPVideo
 
                 //video.Id = data[1];
 
-                video.DateTime = DateTime.Parse(data[0]);
-                video.Id = Int32.Parse(data[1]);
+                //video.DateTime = DateTime.Parse(data[0]);
+                //video.Id = Int32.Parse(data[1]);
+                video.Message = (data[0]);
 
-                Console.WriteLine(video.DateTime + " " + video.Id + " ");
+                //Console.WriteLine(video.DateTime + " " + video.Id + " " );
+               
+                Console.WriteLine(receivedData);
             }
             catch (Exception e)
             {
