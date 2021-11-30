@@ -43,6 +43,11 @@ namespace UDPVideo
                 //Console.WriteLine(video.DateTime + " " + video.Id + " " );
                
                 Console.WriteLine(receivedData);
+
+                Video v = Consumer
+                    .PostToReceiver<Video, Video>("https://camsanctuary.azurewebsites.net/api/receiver", video).Result;
+
+
             }
             catch (Exception e)
             {
