@@ -30,7 +30,7 @@ namespace UDPVideo
 
                 string receivedData = Encoding.ASCII.GetString(receivedBytes);
 
-                string[] data = receivedData.Split(":");
+                string[] data = receivedData.Split("|");
 
                 //video.DateTime = data[0];
 
@@ -39,7 +39,7 @@ namespace UDPVideo
                 //video.DateTime = DateTime.Parse(data[0]);
                 //video.Id = Int32.Parse(data[1]);
                 video.piMessage = (data[0]);
-                video.date = (data[1]);
+                video.date = DateTime.ParseExact(data[1],"yyyy-MM-dd HH:mm:ss.ffffff", System.Globalization.CultureInfo.InvariantCulture);
 
                 //Console.WriteLine(video.DateTime + " " + video.Id + " " );
                
