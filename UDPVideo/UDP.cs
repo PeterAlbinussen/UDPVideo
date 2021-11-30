@@ -32,10 +32,7 @@ namespace UDPVideo
 
                 string[] data = receivedData.Split("|");
 
-                //video.DateTime = data[0];
-
-                //video.Id = data[1];
-
+              
                 //video.DateTime = DateTime.Parse(data[0]);
                 //video.Id = Int32.Parse(data[1]);
                 video.piMessage = (data[0]);
