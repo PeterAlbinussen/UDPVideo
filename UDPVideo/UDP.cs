@@ -21,8 +21,8 @@ namespace UDPVideo
 
             IPEndPoint remoteIpEndPoint = new IPEndPoint(ip, 9999);
 
-            try
-            {
+            //try
+            //{
                 Video video = new Video();
 
                 Byte[] receivedBytes = updserver.Receive(ref remoteIpEndPoint);
@@ -30,7 +30,7 @@ namespace UDPVideo
 
                 string receivedData = Encoding.ASCII.GetString(receivedBytes);
 
-                string[] data = receivedData.Split(" ");
+                string[] data = receivedData.Split(":");
 
                 //video.DateTime = data[0];
 
@@ -38,7 +38,8 @@ namespace UDPVideo
 
                 //video.DateTime = DateTime.Parse(data[0]);
                 //video.Id = Int32.Parse(data[1]);
-                video.Message = (data[0]);
+                video.piMessage = (data[0]);
+                video.date = (data[1]);
 
                 //Console.WriteLine(video.DateTime + " " + video.Id + " " );
                
@@ -48,12 +49,12 @@ namespace UDPVideo
                     .PostToReceiver<Video, Video>("https://camsanctuary.azurewebsites.net/api/receiver", video).Result;
 
 
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-                throw;
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.ToString());
+            //    throw;
+            //}
         }
     }
 }

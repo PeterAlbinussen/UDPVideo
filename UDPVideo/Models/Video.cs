@@ -9,9 +9,9 @@ namespace UDPVideo.Models
 {
     class Video
     {
-        public DateTime DateTime {get; set; }
-        public int Id { get; set; }
-        public string Message { get; set; }
+        public string date {get; set; }
+        public int id { get; set; }
+        public string piMessage { get; set; }
         
         
 
@@ -19,7 +19,7 @@ namespace UDPVideo.Models
 
         public override string ToString()
         {
-            return "Dato og tid: " + DateTime + Message + ": message Recieved";
+            return "Dato og tid: " + date + piMessage + ": message Recieved";
         }
 
     }
