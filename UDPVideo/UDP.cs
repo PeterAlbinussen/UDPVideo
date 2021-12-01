@@ -8,50 +8,35 @@ using UDPVideo.Models;
 
 namespace UDPVideo
 {
-    class UDP
-    {
-        private static int _nextId = 1;
+	class UDP
+	{
+		private static int _nextId = 1;
 
-        UdpClient updserver = new UdpClient(7777);
+		UdpClient updserver = new UdpClient(7777);
 
-        public void ReceiverData()
-        {
-            
-            IPAddress ip = IPAddress.Any;
+		public void ReceiverData()
+		{
 
-            IPEndPoint remoteIpEndPoint = new IPEndPoint(ip, 9999);
+			IPAddress ip = IPAddress.Any;
 
-            //try
-            //{
-                Video video = new Video();
+			IPEndPoint remoteIpEndPoint = new IPEndPoint(ip, 9999);
 
-                Byte[] receivedBytes = updserver.Receive(ref remoteIpEndPoint);
-                Console.WriteLine("received information from sensor: ");
+			Video video = new Video();
 
-                string receivedData = Encoding.ASCII.GetString(receivedBytes);
+			Byte[] receivedBytes = updserver.Receive(ref remoteIpEndPoint);
+			Console.WriteLine("received information from sensor: ");
 
-                string[] data = receivedData.Split("|");
+			string receivedData = Encoding.ASCII.GetString(receivedBytes);
 
-              
-                //video.DateTime = DateTime.Parse(data[0]);
-                //video.Id = Int32.Parse(data[1]);
-                video.piMessage = (data[0]);
-                video.date = DateTime.ParseExact(data[1],"yyyy-MM-dd HH:mm:ss.ffffff", System.Globalization.CultureInfo.InvariantCulture);
+			string[] data = receivedData.Split("|");
 
-                //Console.WriteLine(video.DateTime + " " + video.Id + " " );
-               
-                Console.WriteLine(receivedData);
+			video.piMessage = (data[0]);
+			video.date = DateTime.ParseExact(data[1], "yyyy-MM-dd HH:mm:ss.ffffff", System.Globalization.CultureInfo.InvariantCulture);
 
-                Video v = Consumer
-                    .PostToReceiver<Video, Video>("https://camsanctuary.azurewebsites.net/api/receiver", video).Result;
+			Console.WriteLine(receivedData);
 
-
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e.ToString());
-            //    throw;
-            //}
-        }
-    }
+			Video v = Consumer
+				.PostToReceiver<Video, Video>("https://camsanctuary.azurewebsites.net/api/receiver", video).Result;
+		}
+	}
 }
