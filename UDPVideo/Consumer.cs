@@ -13,7 +13,7 @@ namespace UDPVideo
 {
     class Consumer
     {
-        public static async Task<TOut> PostToReceiver<TIn, TOut>(string uri, TIn item)
+        public static async Task<bool> PostToReceiver<TIn>(string uri, TIn item)
         {
             using HttpClient client = new HttpClient();
 
@@ -27,13 +27,10 @@ namespace UDPVideo
 
             if (response.IsSuccessStatusCode)
             {
-                TOut data = JsonConvert.DeserializeObject<TOut>(responseContent);
-                return data;
-
-
+                return true;
             }
 
-            throw new KeyNotFoundException($"status code = {response.StatusCode} message={responseContent}");
+            return false;
         }
 
     }

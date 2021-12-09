@@ -10,7 +10,7 @@ namespace UDPVideo.Models
     class Video
     {
         public DateTime date {get; set; }
-        public int id { get; set; }
+        public string pictureid { get; set; }
         public string piMessage { get; set; }
         
         

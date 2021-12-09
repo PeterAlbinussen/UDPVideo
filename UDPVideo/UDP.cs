@@ -18,25 +18,28 @@ namespace UDPVideo
 		{
 
 			IPAddress ip = IPAddress.Any;
-
-			IPEndPoint remoteIpEndPoint = new IPEndPoint(ip, 9999);
-
-			Video video = new Video();
+            IPEndPoint remoteIpEndPoint = new IPEndPoint(ip, 7777);
+            Video video = new Video();
 
 			Byte[] receivedBytes = updserver.Receive(ref remoteIpEndPoint);
 			Console.WriteLine("received information from sensor: ");
 
 			string receivedData = Encoding.ASCII.GetString(receivedBytes);
-
-			string[] data = receivedData.Split("|");
+            string[] data = receivedData.Split("|");
 
 			video.piMessage = (data[0]);
 			video.date = DateTime.ParseExact(data[1], "yyyy-MM-dd HH:mm:ss.ffffff", System.Globalization.CultureInfo.InvariantCulture);
-
-			Console.WriteLine(receivedData);
-
-			Video v = Consumer
-				.PostToReceiver<Video, Video>("https://camsanctuary.azurewebsites.net/api/receiver", video).Result;
+            video.pictureid = (data[2]);
+            Console.WriteLine(receivedData);
+            if (Consumer.PostToReceiver<Video>("https://camsanctuary.azurewebsites.net/api/receiver", video)
+                .Result)
+            {
+                Console.WriteLine("Success");
+            }
+            else
+            {
+                Console.WriteLine("Failure");
+            }
 		}
 	}
 }
